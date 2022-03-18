@@ -1,3 +1,4 @@
+import { connect } from "react-redux"
 import styled from "styled-components"
 
 const Carrito = ({ carrito, eliminarProducto }) => {
@@ -74,5 +75,21 @@ const SinResultados = styled.p`
     margin-top: 80px;
     opacity: 0.5;
 `
+const mapStateToProps = ( estado )=>{
+    return{
+        carrito: estado.carrito
+    }
+}
 
-export default Carrito
+const mapDispatchToProps = ( dispatch ) => {
+    return {
+        eliminarProducto: ( producto ) => {
+            dispatch({
+                type: 'ELIMINAR_PRODUCTO',
+                producto: producto
+            })
+        }   
+    }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Carrito )
